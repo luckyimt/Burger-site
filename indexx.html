@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="allcss.css">
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=ARf-RdlCTjnFCBXP-6s-dOK19oMSRmzdFHZ-PNUfHwecBnMksEhVVnaKPuIl-W3E8QyGOAdJnTwtG2-G&currency=USD"></script>
+</head>
+
+
+<body onload="loadCart()">
+<div class="background">
+  <div class="line-overlay"></div>
+</div>
+
+  <div class="container">
+    <div class="st-row">
+      <div class="text-box">
+        
+
+
+<div class="form" id="signupForm">
+          <h2>Signup</h2>
+          <input type="text" id="signupUsername" placeholder="Username" required />
+          <input type="password" id="signupPassword" placeholder="Password" required />
+          <button onclick="signup()">Signup</button>
+  </div>
+<div class="form" id="loginForm" style="margin-top: 30px;">
+          <h2>Login</h2>
+          <input type="text" id="loginUsername" placeholder="Username" required />
+
+          <input type="password" id="loginPassword" placeholder="Password" required />
+          <button onclick="login()">Login</button>
+  </div>
+
+        <p id="message"></p>
+      
+
+
+</div>
+</div>
+</div>
+<div class="swiper-container" id="mobileSwiper">
+  <div class="swiper-wrapper">
+    <img src="beef.jpg" class="swiper-slide" />
+    <img src="chips.jpg" class="swiper-slide" />
+    <img src="sandwish.jpg" class="swiper-slide" />
+  </div>
+  <button class="nav-button prev">&#10094;</button>
+  <button class="nav-button next">&#10095;</button>
+</div>
+    </div>
+
+
+
+
+
+
+
+ 
+ <script>
+    const box = document.getElementById("box");
+    let offsetX = 0;
+    let offsetY = 0;
+    let isDragging = false;
+
+    function onTouchStart(e) {
+      isDragging = true;
+      const touch = e.touches[0];
+      const boxRect = box.getBoundingClientRect();
+      offsetX = touch.clientX - boxRect.left;
+      offsetY = touch.clientY - boxRect.top;
+    }
+
+    function onTouchMove(e) {
+      if (!isDragging) return;
+      e.preventDefault(); // Prevent scrolling while dragging
+      const touch = e.touches[0];
+      const x = touch.clientX - offsetX;
+      const y = touch.clientY - offsetY;
+      box.style.left = x + "px";
+      box.style.top = y + "px";
+    }
+
+    function onTouchEnd() {
+      isDragging = false;
+    }
+
+    // Add touch event listeners
+    box.addEventListener("touchstart", onTouchStart);
+    box.addEventListener("touchmove", onTouchMove);
+    box.addEventListener("touchend", onTouchEnd);
+
+    // Optional: Support mouse dragging too
+    box.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - box.offsetLeft;
+      offsetY = e.clientY - box.offsetTop;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      box.style.left = (e.clientX - offsetX) + "px";
+      box.style.top = (e.clientY - offsetY) + "px";
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+  </script>
+
+
+
+
+
+
+
+
+<script>
+// Helper: Get users from localStorage
+function getUsers() {
+  const users = localStorage.getItem('users');
+  return users ? JSON.parse(users) : {};
+}
+
+// Helper: Save users to localStorage
+function saveUsers(users) {
+  localStorage.setItem('users', JSON.stringify(users));
+}
+
+// Signup Function
+function signup() {
+  const username = document.getElementById('signupUsername').value;
+  const password = document.getElementById('signupPassword').value;
+  const message = document.getElementById('message');
+
+  if (!username || !password) {
+    message.textContent = 'Please fill in all fields.';
+    return;
+  }
+
+  const users = getUsers();
+  if (users[username]) {
+    message.textContent = 'Username already exists.';
+    return;
+  }
+
+  users[username] = password; // ❗ Storing password in plain text (for demo only)
+  saveUsers(users);
+  message.textContent = 'Signup successful! You can now log in.';
+}
+
+// Login Function
+function login() {
+
+    event.preventDefault();
+    const username = document.getElementById("loginUsername").value;
+    sessionStorage.setItem("loginUsername", username);
+
+  const password = document.getElementById('loginPassword').value;
+  const message = document.getElementById('message');
+
+  const users = getUsers();
+
+  if (users[username] && users[username] === password) {
+    // Optionally store logged-in user info
+    localStorage.setItem('loggedInUser', username);
+
+
+    // Redirect to your page
+    window.location.href = 'burger-shop.html';  // 👈 CHANGE TO YOUR PAGE
+  } else {
+    message.textContent = 'Invalid username or password.';
+  }
+}
+
+</script>
+
+
+
+<script>
+  const wrapper = document.querySelector('.swiper-wrapper');
+  const slides = wrapper.children;
+  let index = 0;
+  const total = slides.length;
+  const bounceDistance = 15;
+  let isBouncing = false;
+
+  function showSlide(i, animate = true) {
+    if (animate) {
+      wrapper.style.transition = "transform 0.5s ease-in-out";
+    } else {
+      wrapper.style.transition = "none";
+    }
+    wrapper.style.transform = `translateX(${-i * 100}%)`;
+  }
+
+  function bounce(direction) {
+    if (isBouncing) return;
+    isBouncing = true;
+    wrapper.style.transition = "transform 0.2s ease";
+    const offset = -index * 100 + (direction === "left" ? bounceDistance : -bounceDistance) / wrapper.clientWidth * 100;
+    wrapper.style.transform = `translateX(${offset}%)`;
+    setTimeout(() => {
+      showSlide(index);
+      isBouncing = false;
+    }, 200);
+  }
+
+  document.querySelector('.prev').addEventListener('click', () => {
+    if (index === 0) {
+      bounce("left");
+    } else {
+      index--;
+      showSlide(index);
+    }
+  });
+
+  document.querySelector('.next').addEventListener('click', () => {
+    if (index === total - 1) {
+      bounce("right");
+    } else {
+      index++;
+      showSlide(index);
+    }
+  });
+
+  // Swipe handling
+  let startX = 0;
+  wrapper.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  wrapper.addEventListener('touchend', (e) => {
+    const delta = e.changedTouches[0].clientX - startX;
+    if (Math.abs(delta) > 50) {
+      if (delta > 0) {
+        if (index === 0) bounce("left");
+        else index--;
+      } else {
+        if (index === total - 1) bounce("right");
+        else index++;
+      }
+      showSlide(index);
+    }
+  });
+
+  // Autoplay every 4 seconds
+  setInterval(() => {
+    index = (index + 1) % total;
+    showSlide(index);
+  }, 4000);
+</script>
+
+
+
+</body>
+</html>
