@@ -39,17 +39,6 @@
 </div>
 <div class="message" id="message"></div>
 
-<div class="body2">
-<div class="hex"><img src="burger.jpg" alt="Cat"></div>
-  <div class="hex"><img src="chips.jpg" alt="Cat"></div>
-  <div class="hex"><img src="beef.jpg" alt="Cat"></div>
-  <div class="hex"><img src="pork.jpg" alt="Cat"></div>
-  <div class="hex"><img src="sandwish.jpg" alt="Cat"></div>
-  <div class="hex"><img src="cola.jpg" alt="Cat"></div>
-
- <div class="hex"><img src="grill.jpg" alt="Cat"></div>
-  <div class="hex"><img src="chicken.jpg" alt="Cat"></div>
-</div>
 
 
 </div><!--container-->
@@ -116,12 +105,8 @@ function signup() {
   message.textContent = 'Signup successful! You can now log in.';
 }
 
-
 // Login Function
 function login() {
-
-  
-
     event.preventDefault();
     const username = document.getElementById("loginUsername").value;
     sessionStorage.setItem("loginUsername", username);
@@ -129,13 +114,11 @@ function login() {
   const password = document.getElementById('loginPassword').value;
   const message = document.getElementById('message');
 
-
   const users = getUsers();
 
   if (users[username] && users[username] === password) {
     // Optionally store logged-in user info
     localStorage.setItem('loggedInUser', username);
-
 
     // Redirect to your page
     window.location.href = 'burger-shop.html';  // 👈 CHANGE TO YOUR PAGE
@@ -145,10 +128,6 @@ function login() {
 }
 
 </script>
-
-
-
-
 
 <script>
 const loginBtn = document.getElementById('loginBtn');
@@ -170,8 +149,6 @@ signupBtn.addEventListener('click', () => {
   loginForm.classList.remove('active');
 });
 </script>
-
-
 
 </body>
 </html>
