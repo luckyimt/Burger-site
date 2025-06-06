@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="style.css">
+
+<script src="/analytics.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=ARf-RdlCTjnFCBXP-6s-dOK19oMSRmzdFHZ-PNUfHwecBnMksEhVVnaKPuIl-W3E8QyGOAdJnTwtG2-G&currency=USD"></script>
+
+
+</head>
+
+
+<body onload="loadCart()">
+
+<div class="tabmenu">
+  <h1>welcome member, </h1> 
+<h1 id="userDisplay"></h1>
+<button onclick="logout()" class="fire-button">logout</button>
+
+<button data-track>Buy Now</button>
+  <script>
+
+    const username = sessionStorage.getItem("loginUsername");
+    document.getElementById("userDisplay").textContent = username || "Guest";
+  </script>
+
+<div class="perimeter">
+
+<div class="left-column">
+
+
+<div class="row">
+
+
+ <h1>Welcome, <span id="userDisplay"></span>!</h1>
+</div>
+<div class="row">
+<div class="menu" onclick="showTab(0)">
+cHEESE bURGER
+</div>
+</div>
+<div class="row">
+<div class="menu" onclick="showTab(2)">
+cLUBSANDWISH
+</div>
+</div>
+<div class="row">
+<div class="menu" onclick="showTab(1)">
+fRENCHFRY
+</div>
+</div> 
+<div class="row">
+<div id="cart"></div>
+
+<div id="total" class="total">Total: $0.00</div>
+ <div id="paypal-button-container"></div>
+
+<button onclick="contracts()">Send</button>
+  <div id="response"></div>
+
+</div><!--close left column-->
+</div>
+
+<div class="right-column">
+
+<div class="tab-content active">
+
+<div class="product" data-id="1" data-img="beef.jpg" data-name="cheese-beef" data-price="99">
+<div class="label">Beef</div>
+<img src="beef.jpg" alt="beef" class="product-img">
+<button class="fire-button" onclick="addToCart(1)">pick</button>
+</div>
+<div class="product" data-id="2" data-img="pork.jpg" data-name="cheese-pork" data-price="79">
+<div class="label">Pork</div>
+<img src="pork.jpg" alt="pork" class="product-img">
+<button class="fire-button" onclick="addToCart(2)">pick</button>
+</div>
+<div class="product" data-id="3" data-img="chicken.jpg" data-name="cheese-chicken" data-price="69">
+<div class="label">Chicken</div>
+<img src="chicken.jpg" alt="chicken" class="product-img">
+<button class="fire-button" onclick="addToCart(3)">pick</button>
+</div>
+
+</div>
+
+<div class="tab-content" >
+<div class="product" data-id="4" data-img="chips.jpg" data-name="frenchfries" data-price="69" >
+<div class="label">Fries</div>
+<img src="chips.jpg" alt="frenchfries" class="product-img">
+ <p>Right content line</p>
+ <p>Right  line </p>
+ <p>Content line </p>
+ <p>Right content  </p>
+ <p>Right line </p>
+<button class="fire-button" onclick="addToCart(4)">pick</button>
+</div>
+</div>
+
+<div class="tab-content">
+<div class="product" data-id="5" data-img="sandwish.jpg" data-name="sandwish" data-price="99">
+<div class="label">Sandwish</div>
+<img src="sandwish.jpg" alt="sandwish" class="product-img">
+ <p>Right content line</p>
+ <p>Right  line </p>
+ <p>Content line </p>
+ <p>Right content  </p>
+ <p>Right line </p>
+<button class="fire-button" onclick="addToCart(5)">pick</button>
+</div>
+</div>
+
+</div><!--
+close right column-->
+
+<div class="social-container">
+    <a href="#" class="social-link">
+      <img src="fb.jpg" alt="Facebook">
+      <div>Facebook</div>
+    </a>
+    <a href="#" class="social-link">
+      <img src="twitter.jpg" alt="Twitter">
+      <div>Twitter</div>
+    </a>
+    <a href="#" class="social-link">
+      <img src="ig.jpg" alt="Instagram">
+      <div>Instagram</div>
+    </a>
+    <a href="#" class="social-link">
+      <img src="in.jpg" alt="LinkedIn">
+      <div>LinkedIn</div>
+    </a>
+    <a href="#" class="social-link">
+      <img src="yt.jpg" alt="YouTube">
+      <div>YouTube</div>
+    </a>
+</div>
+</div>
+</div>
+<script>
+  localStorage.setItem('loggedInUser', username);
+
+
+const users = localStorage.getItem('users');
+</script>
+
+<script>
+function addToCart(productId) {
+      
+const cartKey = getCartKey();
+  let cartOwner = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+
+const product = document.querySelector(`.product[data-id='${productId}']`);
+      const name = product.getAttribute('data-name');
+      const price = parseFloat(product.getAttribute('data-price'));
+const image = product.getAttribute('data-img');
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ img:image, id: productId, name, price, quantity: 1 , users});
+      }
+      saveCart();
+      renderCart();
+}
+
+function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      renderCart();
+    }
+    
+function renderCart() 
+{
+
+ const cartKey = getCartKey();
+   const cartContainer = document.getElementById('cart');
+   cartContainer.innerHTML = cart.map(item => `
+     <div class="cart-item">
+       <div><img src="${item.img}" class="cart-img"></div><div class="sum">x${item.quantity} = $${(item.price * item.quantity).toFixed(2)} 
+ <button class="fire-button" onclick="removeFromCart(${item.id})">cancel</button>
+</div>
+                </div>
+     `).join('');
+     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+currentUser = getCartKey;()
+
+currentTotal = total;
+document.getElementById('total').textContent = total.toFixed(2);
+    }
+
+function saveCart() {
+   localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+function loadCart() {
+
+      const stored = localStorage.getItem('cart');
+      if (stored) {
+        cart = JSON.parse(stored);
+        renderCart();
+      }
+    }
+</script>
+
+<script>
+  function logout() {
+
+sessionStorage.clear();
+
+    // Redirect to login page or home
+    window.location.href = 'burger.html';
+  }
+</script>
+
+<script>
+const express = require('express');
+const app = express();
+const port = 3000;
+
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.json());
+
+app.post("/webhook/paypal", async (req, res) => {
+    const body = req.body;
+
+    if (body.event_type === "PAYMENT.SALE.COMPLETED") {
+        const orderId = body.resource.parent_payment;
+        const payerEmail = body.resource.payer.payer_info.email;
+        const amount = body.resource.amount.total;
+
+        // Save to database
+        await saveOrderToDatabase(orderId, payerEmail, amount);
+
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(400);
+    }
+}
+);
+</script>
+
+<script>
+let currentTotal = 0;
+let cart =  [];
+</script>
+
+<script>
+paypal.Buttons({
+ style: {
+        layout: 'vertical',
+        color:  'blue',
+        shape:  'rect',
+        label:  'pay'
+      },
+  createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: currentTotal.toFixed(2)
+        }
+      }]
+    });
+  },
+     onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            // ✅ Notify store owner here (via your backend)
+            fetch('/notify-store-owner', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    payerName: details.payer.name.given_name,
+                    payerEmail: details.payer.email_address,
+                    amount: details.purchase_units[0].amount.value
+                })
+            });
+            alert('Transaction completed by ' + details.payer.name.given_name);
+        });
+    }
+}).render('#paypal-button-container');
+
+</script>
+
+<script>
+function showTab(index) {
+    const tabs = document.querySelectorAll('.fire-button');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+      contents[i].classList.toggle('active', i === index);
+    });
+  }
+</script>
+
+
+
+
+
+
+<script>
+ <!--analytix -->
+(function () {
+  const analyticsEndpoint = 'http://localhost:3000/collect'; // Replace with real API
+  const sessionKey = 'user_session_id';
+
+  // Reuse or create a session ID
+  function getSessionId() {
+    let sessionId = localStorage.getItem(sessionKey);
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem(sessionKey, sessionId);
+    }
+    return sessionId;
+  }
+
+  const sessionId = getSessionId();
+
+  // Base event payload
+  const sessionData = {
+    url: window.location.href,
+    referrer: document.referrer,
+    userAgent: navigator.userAgent,
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Send pageview
+  fetch(analyticsEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-session-id': sessionId
+    },
+    body: JSON.stringify({ type: 'pageview', data: sessionData })
+  });
+
+  // Track clicks on elements with data-track
+  document.addEventListener('click', function (event) {
+    const target = event.target.closest('[data-track]');
+    if (!target) return;
+
+    const clickData = {
+      ...sessionData,
+      element: target.tagName,
+      id: target.id,
+      className: target.className,
+      innerText: target.innerText.slice(0, 100),
+      time: new Date().toISOString(),
+    };
+
+    fetch(analyticsEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-session-id': sessionId
+      },
+      body: JSON.stringify({ type: 'click', data: clickData })
+    });
+  });
+})();
+</script>
+
+
+<script>
+
+function getCartKey() {
+  const user = localStorage.getItem('users');
+  return `cart_${user}`;
+}  
+
+</script>
+
+<script>
+
+window.onload = () => {
+  const user = localStorage.getItem('users');
+  if (user) {
+    document.getElementById('users').textContent = user;
+    document.getElementById('cart').style.display = 'block';
+    loadCart();
+  }
+
+</script>
+
+
+
+
+
+</body>
+</html>
+
