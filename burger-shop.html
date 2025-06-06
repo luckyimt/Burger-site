@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="allcss.css">
 
 <script src="/analytics.js"></script>
+
 <script src="https://www.paypal.com/sdk/js?client-id=ARf-RdlCTjnFCBXP-6s-dOK19oMSRmzdFHZ-PNUfHwecBnMksEhVVnaKPuIl-W3E8QyGOAdJnTwtG2-G&currency=USD"></script>
 
 
@@ -30,10 +31,9 @@
 
 
 <div class="row">
-
-
  <h1>Welcome, <span id="userDisplay"></span>!</h1>
 </div>
+
 <div class="row">
 <div class="menu" onclick="showTab(0)">
 cHEESE bURGER
@@ -55,8 +55,6 @@ fRENCHFRY
 <div id="total" class="total">Total: $0.00</div>
  <div id="paypal-button-container"></div>
 
-<button onclick="contracts()">Send</button>
-  <div id="response"></div>
 
 </div><!--close left column-->
 </div>
@@ -146,10 +144,6 @@ const users = localStorage.getItem('users');
 <script>
 function addToCart(productId) {
       
-const cartKey = getCartKey();
-  let cartOwner = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-
 const product = document.querySelector(`.product[data-id='${productId}']`);
       const name = product.getAttribute('data-name');
       const price = parseFloat(product.getAttribute('data-price'));
@@ -172,8 +166,6 @@ function removeFromCart(productId) {
     
 function renderCart() 
 {
-
- const cartKey = getCartKey();
    const cartContainer = document.getElementById('cart');
    cartContainer.innerHTML = cart.map(item => `
      <div class="cart-item">
@@ -184,7 +176,6 @@ function renderCart()
      `).join('');
      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-currentUser = getCartKey;()
 
 currentTotal = total;
 document.getElementById('total').textContent = total.toFixed(2);
@@ -210,7 +201,7 @@ function loadCart() {
 sessionStorage.clear();
 
     // Redirect to login page or home
-    window.location.href = 'index.html';
+    window.location.href = 'burger.html';
   }
 </script>
 
@@ -219,8 +210,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const cors = require('cors');
-app.use(cors());
+
 
 app.use(express.json());
 
@@ -299,92 +289,6 @@ function showTab(index) {
 
 
 
-
-<script>
- <!--analytix -->
-(function () {
-  const analyticsEndpoint = 'http://localhost:3000/collect'; // Replace with real API
-  const sessionKey = 'user_session_id';
-
-  // Reuse or create a session ID
-  function getSessionId() {
-    let sessionId = localStorage.getItem(sessionKey);
-    if (!sessionId) {
-      sessionId = crypto.randomUUID();
-      localStorage.setItem(sessionKey, sessionId);
-    }
-    return sessionId;
-  }
-
-  const sessionId = getSessionId();
-
-  // Base event payload
-  const sessionData = {
-    url: window.location.href,
-    referrer: document.referrer,
-    userAgent: navigator.userAgent,
-    screenWidth: window.screen.width,
-    screenHeight: window.screen.height,
-    timestamp: new Date().toISOString(),
-  };
-
-  // Send pageview
-  fetch(analyticsEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-session-id': sessionId
-    },
-    body: JSON.stringify({ type: 'pageview', data: sessionData })
-  });
-
-  // Track clicks on elements with data-track
-  document.addEventListener('click', function (event) {
-    const target = event.target.closest('[data-track]');
-    if (!target) return;
-
-    const clickData = {
-      ...sessionData,
-      element: target.tagName,
-      id: target.id,
-      className: target.className,
-      innerText: target.innerText.slice(0, 100),
-      time: new Date().toISOString(),
-    };
-
-    fetch(analyticsEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-session-id': sessionId
-      },
-      body: JSON.stringify({ type: 'click', data: clickData })
-    });
-  });
-})();
-</script>
-
-
-<script>
-
-function getCartKey() {
-  const user = localStorage.getItem('users');
-  return `cart_${user}`;
-}  
-
-</script>
-
-<script>
-
-window.onload = () => {
-  const user = localStorage.getItem('users');
-  if (user) {
-    document.getElementById('users').textContent = user;
-    document.getElementById('cart').style.display = 'block';
-    loadCart();
-  }
-
-</script>
 
 
 
