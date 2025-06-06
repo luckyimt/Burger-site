@@ -118,7 +118,7 @@ function login() {
 
   if (users[username] && users[username] === password) {
     // Optionally store logged-in user info
-    localStorage.setItem('loggedInUser', username);
+    localStorage.setItem('loginUsername', username);
 
     // Redirect to your page
     window.location.href = 'burger-shop.html';  // 👈 CHANGE TO YOUR PAGE
