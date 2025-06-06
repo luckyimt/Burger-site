@@ -14,107 +14,72 @@
 </div>
 
   <div class="container">
-    <div class="st-row">
-      <div class="text-box">
-        
-
-
-<div class="form" id="signupForm">
-          <h2>Signup</h2>
-          <input type="text" id="signupUsername" placeholder="Username" required />
-          <input type="password" id="signupPassword" placeholder="Password" required />
-          <button onclick="signup()">Signup</button>
-  </div>
-<div class="form" id="loginForm" style="margin-top: 30px;">
-          <h2>Login</h2>
-          <input type="text" id="loginUsername" placeholder="Username" required />
-
-          <input type="password" id="loginPassword" placeholder="Password" required />
-          <button onclick="login()">Login</button>
+  
+<div class="form-toggle-container">
+  <div class="toggle-buttons">
+    <button id="loginBtn" class="active">Login</button>
+    <button id="signupBtn">Signup</button>
   </div>
 
-        <p id="message"></p>
-      
+  <div class="forms">
+    <form id="loginForm" class="form active">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" id="loginUsername"required />
+      <input type="password" placeholder="Password" id="loginPassword" required />
+      <button onclick="login()">Login</button>
+    </form>
 
-
-</div>
-</div>
-</div>
-<div class="swiper-container" id="mobileSwiper">
-  <div class="swiper-wrapper">
-    <img src="beef.jpg" class="swiper-slide" />
-    <img src="chips.jpg" class="swiper-slide" />
-    <img src="sandwish.jpg" class="swiper-slide" />
+    <form id="signupForm" class="form">
+      <h2>Signup</h2>
+      <input type="text" placeholder="Username" id="signupUsername" required />
+      <input type="password" placeholder="Password" id="signupPassword" required />
+      <button onclick="signup()">Signup</button>
+    </form>
   </div>
-  <button class="nav-button prev">&#10094;</button>
-  <button class="nav-button next">&#10095;</button>
 </div>
-    </div>
+<div class="message" id="message"></div>
+
+<div class="body2">
+<div class="hex"><img src="burger.jpg" alt="Cat"></div>
+  <div class="hex"><img src="chips.jpg" alt="Cat"></div>
+  <div class="hex"><img src="beef.jpg" alt="Cat"></div>
+  <div class="hex"><img src="pork.jpg" alt="Cat"></div>
+  <div class="hex"><img src="sandwish.jpg" alt="Cat"></div>
+  <div class="hex"><img src="cola.jpg" alt="Cat"></div>
+
+ <div class="hex"><img src="grill.jpg" alt="Cat"></div>
+  <div class="hex"><img src="chicken.jpg" alt="Cat"></div>
+</div>
 
 
+</div><!--container-->
 
 
+  <div id="response"></div>
 
+  <script>
+    function sendApiRequest() {
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
 
-
- 
- <script>
-    const box = document.getElementById("box");
-    let offsetX = 0;
-    let offsetY = 0;
-    let isDragging = false;
-
-    function onTouchStart(e) {
-      isDragging = true;
-      const touch = e.touches[0];
-      const boxRect = box.getBoundingClientRect();
-      offsetX = touch.clientX - boxRect.left;
-      offsetY = touch.clientY - boxRect.top;
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ address, phone })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('response').textContent =
+          'Response:\n' + JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        document.getElementById('response').textContent =
+          'Error:\n' + error.toString();
+      });
     }
-
-    function onTouchMove(e) {
-      if (!isDragging) return;
-      e.preventDefault(); // Prevent scrolling while dragging
-      const touch = e.touches[0];
-      const x = touch.clientX - offsetX;
-      const y = touch.clientY - offsetY;
-      box.style.left = x + "px";
-      box.style.top = y + "px";
-    }
-
-    function onTouchEnd() {
-      isDragging = false;
-    }
-
-    // Add touch event listeners
-    box.addEventListener("touchstart", onTouchStart);
-    box.addEventListener("touchmove", onTouchMove);
-    box.addEventListener("touchend", onTouchEnd);
-
-    // Optional: Support mouse dragging too
-    box.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      offsetX = e.clientX - box.offsetLeft;
-      offsetY = e.clientY - box.offsetTop;
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-      box.style.left = (e.clientX - offsetX) + "px";
-      box.style.top = (e.clientY - offsetY) + "px";
-    });
-
-    document.addEventListener("mouseup", () => {
-      isDragging = false;
-    });
   </script>
-
-
-
-
-
-
-
 
 <script>
 // Helper: Get users from localStorage
@@ -134,6 +99,7 @@ function signup() {
   const password = document.getElementById('signupPassword').value;
   const message = document.getElementById('message');
 
+
   if (!username || !password) {
     message.textContent = 'Please fill in all fields.';
     return;
@@ -150,8 +116,11 @@ function signup() {
   message.textContent = 'Signup successful! You can now log in.';
 }
 
+
 // Login Function
 function login() {
+
+  
 
     event.preventDefault();
     const username = document.getElementById("loginUsername").value;
@@ -159,6 +128,7 @@ function login() {
 
   const password = document.getElementById('loginPassword').value;
   const message = document.getElementById('message');
+
 
   const users = getUsers();
 
@@ -178,81 +148,31 @@ function login() {
 
 
 
+
+
 <script>
-  const wrapper = document.querySelector('.swiper-wrapper');
-  const slides = wrapper.children;
-  let index = 0;
-  const total = slides.length;
-  const bounceDistance = 15;
-  let isBouncing = false;
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
 
-  function showSlide(i, animate = true) {
-    if (animate) {
-      wrapper.style.transition = "transform 0.5s ease-in-out";
-    } else {
-      wrapper.style.transition = "none";
-    }
-    wrapper.style.transform = `translateX(${-i * 100}%)`;
-  }
+loginBtn.addEventListener('click', () => {
+  loginBtn.classList.add('active');
+  signupBtn.classList.remove('active');
+  loginForm.classList.add('active');
+  signupForm.classList.remove('active');
+});
 
-  function bounce(direction) {
-    if (isBouncing) return;
-    isBouncing = true;
-    wrapper.style.transition = "transform 0.2s ease";
-    const offset = -index * 100 + (direction === "left" ? bounceDistance : -bounceDistance) / wrapper.clientWidth * 100;
-    wrapper.style.transform = `translateX(${offset}%)`;
-    setTimeout(() => {
-      showSlide(index);
-      isBouncing = false;
-    }, 200);
-  }
-
-  document.querySelector('.prev').addEventListener('click', () => {
-    if (index === 0) {
-      bounce("left");
-    } else {
-      index--;
-      showSlide(index);
-    }
-  });
-
-  document.querySelector('.next').addEventListener('click', () => {
-    if (index === total - 1) {
-      bounce("right");
-    } else {
-      index++;
-      showSlide(index);
-    }
-  });
-
-  // Swipe handling
-  let startX = 0;
-  wrapper.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  wrapper.addEventListener('touchend', (e) => {
-    const delta = e.changedTouches[0].clientX - startX;
-    if (Math.abs(delta) > 50) {
-      if (delta > 0) {
-        if (index === 0) bounce("left");
-        else index--;
-      } else {
-        if (index === total - 1) bounce("right");
-        else index++;
-      }
-      showSlide(index);
-    }
-  });
-
-  // Autoplay every 4 seconds
-  setInterval(() => {
-    index = (index + 1) % total;
-    showSlide(index);
-  }, 4000);
+signupBtn.addEventListener('click', () => {
+  signupBtn.classList.add('active');
+  loginBtn.classList.remove('active');
+  signupForm.classList.add('active');
+  loginForm.classList.remove('active');
+});
 </script>
 
 
 
 </body>
 </html>
+
