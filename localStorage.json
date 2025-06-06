@@ -1,7 +1,7 @@
 {
   "loginUsername" : "Xxxx",
-  "__paypal_storage__" : "{\"id\":\"uid_9bf6a67fea_mdg6mtc6ntq\",\"funding\":{},\"__session__\":{\"guid\":\"uid_e18102af98_mdg6mtc6ntq\",\"created\":1749197874211}}",
-  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":2,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"}]",
+  "__paypal_storage__" : "{\"id\":\"uid_9bf6a67fea_mdg6mtc6ntq\",\"funding\":{},\"__session__\":{\"guid\":\"uid_ebb082d6f0_mdk6mzc6mjg\",\"created\":1749202648740}}",
+  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":3,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"},{\"img\":\"pork.jpg\",\"id\":2,\"name\":\"cheese-pork\",\"price\":79,\"quantity\":1,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"}]",
   "loggedInUser" : "Xxxx",
   "users" : "{\"Xxxx\":\"xxxx\"}"
 }
