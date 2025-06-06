@@ -1,4 +1,7 @@
 {
+  "loginUsername" : "Xxxx",
   "__paypal_storage__" : "{\"id\":\"uid_9bf6a67fea_mdg6mtc6ntq\",\"funding\":{},\"__session__\":{\"guid\":\"uid_e18102af98_mdg6mtc6ntq\",\"created\":1749197874211}}",
-  "loggedInUser" : "null"
+  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":2,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"}]",
+  "loggedInUser" : "Xxxx",
+  "users" : "{\"Xxxx\":\"xxxx\"}"
 }
