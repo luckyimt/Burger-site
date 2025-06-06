@@ -1,9 +1,4 @@
 {
-  "loggdInu" : "null",
-  "loggedInu" : "null",
-  "__paypal_storage__" : "{\"id\":\"uid_2f25cbb2aa_mdu6mtu6ndu\",\"funding\":{},\"__session__\":{\"guid\":\"uid_08bdde2f2e_mdu6mzc6mtq\",\"created\":1749188234266}}",
-  "user_session_id" : "0cf473b0-6b1d-4cd9-978d-992f81392137",
-  "loggedInUser" : "null",
-  "users" : "{\"Pit\":\"pit\"}",
-  "login" : "null"
+  "__paypal_storage__" : "{\"id\":\"uid_1e506d8156_mdc6mjc6mtm\",\"funding\":{},\"__session__\":{\"guid\":\"uid_34bfd608a7_mdc6mjc6mtm\",\"created\":1749194833080}}",
+  "loggedInUser" : "null"
 }
