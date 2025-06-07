@@ -1,7 +1,3 @@
 {
-  "loginUsername" : "Xxxx",
-  "__paypal_storage__" : "{\"id\":\"uid_9bf6a67fea_mdg6mtc6ntq\",\"funding\":{},\"__session__\":{\"guid\":\"uid_ebb082d6f0_mdk6mzc6mjg\",\"created\":1749202648740}}",
-  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":3,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"},{\"img\":\"pork.jpg\",\"id\":2,\"name\":\"cheese-pork\",\"price\":79,\"quantity\":1,\"users\":\"{\\\"Xxxx\\\":\\\"xxxx\\\"}\"}]",
-  "loggedInUser" : "Xxxx",
-  "users" : "{\"Xxxx\":\"xxxx\"}"
+  "__paypal_storage__" : "{\"id\":\"uid_ef3c1763ba_mdq6mje6mze\",\"funding\":{},\"__session__\":{\"guid\":\"uid_9c56521939_mdq6mje6mze\",\"created\":1749270091161}}"
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="allcss.css">
 
 <script src="/analytics.js"></script>
 
@@ -49,7 +49,9 @@ cLUBSANDWISH
 fRENCHFRY
 </div>
 </div> 
+
 <div class="row">
+<div id="loggedInUser"></div>
 <div id="cart"></div>
 
 <div id="total" class="total">Total: $0.00</div>
@@ -134,25 +136,22 @@ close right column-->
 </div>
 </div>
 </div>
-<script>
-  localStorage.setItem('loggedInUser', username);
 
-
-const users = localStorage.getItem('users');
-</script>
 
 <script>
 function addToCart(productId) {
       
 const product = document.querySelector(`.product[data-id='${productId}']`);
-      const name = product.getAttribute('data-name');
+      
+const name = product.getAttribute('data-name');
+
       const price = parseFloat(product.getAttribute('data-price'));
 const image = product.getAttribute('data-img');
       const existingItem = cart.find(item => item.id === productId);
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        cart.push({ img:image, id: productId, name, price, quantity: 1 , users});
+        cart.push({ img:image, id: productId, name, price, quantity: 1 , username});
       }
       saveCart();
       renderCart();
@@ -170,7 +169,8 @@ function renderCart()
    cartContainer.innerHTML = cart.map(item => `
      <div class="cart-item">
        <div><img src="${item.img}" class="cart-img"></div><div class="sum">x${item.quantity} = $${(item.price * item.quantity).toFixed(2)} 
- <button class="fire-button" onclick="removeFromCart(${item.id})">cancel</button>
+ <button class="fire-button" onclick="removeFromCart(${item.id})">cancel</button>${item.username}
+
 </div>
                 </div>
      `).join('');
@@ -201,7 +201,7 @@ function loadCart() {
 sessionStorage.clear();
 
     // Redirect to login page or home
-    window.location.href = 'index.html';
+    window.location.href = 'burger.html';
   }
 </script>
 
@@ -286,6 +286,16 @@ function showTab(index) {
 </script>
 
 
+
+
+
+
+
+
+
+
 </body>
 </html>
+
+
 
