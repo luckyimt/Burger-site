@@ -1,6 +1,6 @@
 {
   "users" : "{\"Poiu\":\"poiu\"}",
   "__paypal_storage__" : "{\"id\":\"uid_27e937e2bc_mdk6ndg6mtq\",\"__session__\":{\"guid\":\"uid_3d13bd26f4_mdc6mje6mzc\",\"created\":1749453697159},\"funding\":{}}",
-  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":1,\"username\":\"Poiu\"},{\"img\":\"pork.jpg\",\"id\":2,\"name\":\"cheese-pork\",\"price\":79,\"quantity\":1,\"username\":null}]",
+  "cart" : "[{\"img\":\"beef.jpg\",\"id\":1,\"name\":\"cheese-beef\",\"price\":99,\"quantity\":2,\"username\":\"Poiu\"},{\"img\":\"pork.jpg\",\"id\":2,\"name\":\"cheese-pork\",\"price\":79,\"quantity\":2,\"username\":null},{\"img\":\"chicken.jpg\",\"id\":3,\"name\":\"cheese-chicken\",\"price\":69,\"quantity\":1,\"username\":\"Poiu\"}]",
   "loggedInUser" : "Poiu"
 }
