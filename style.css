@@ -1,5 +1,5 @@
 html,body {
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #ffaa00, #ffdd00, #ffaa00);
   font-family: 'Segoe UI', sans-serif;
  width:100%;
  height: 100vh;
@@ -8,14 +8,28 @@ html,body {
   padding: 0;
 
 }
-    .body2{
-      background: #111;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
+
+.grid {
+      display: grid;
+      grid-template-columns:      repeat(auto-fit, minmax(150px,1fr));
+      height:100%;)
     }
+
+.arrange{
+
+  display: grid;
+  grid-template-columns:      repeat(auto-fit, minmax(100px,1fr));
+
+}
+
+
+.img-product
+{
+height:70%;
+width:70%;
+border-radius: 15%;
+}
+
 
 .message{
 
@@ -45,6 +59,7 @@ background-image: repeating-linear-gradient(
   );
 
 }
+
 h2 {
 font-family: 'Segoe UI', sans-serif;
 font-size:28px;
@@ -87,6 +102,23 @@ height:100%;
     padding: 2rem;
 }
 
+.line-overlay2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(200, 200, 200, 0.2) 1px,
+    rgba(100, 100, 100, 0.5) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  animation: moveLines2 10s linear infinite;
+  pointer-events: none;
+}
+
 .line-overlay {
   position: absolute;
   top: 0;
@@ -102,7 +134,7 @@ height:100%;
   );
   animation: moveLines 10s linear infinite;
   pointer-events: none;
-}
+}r
 
 @keyframes moveLines {
   0% {
@@ -113,12 +145,30 @@ height:100%;
   }
 }
 
+@keyframes moveLines2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+
+
 .perimeter{
 display:flex;
 width:100%;
 }
-.container{
+.loginsignup{
 display:grid;
+width:100%;
+height:100%;
+
+}
+.container{
+display:flex;
 width:100%;
 height:100%;
     }
@@ -165,24 +215,25 @@ color:rgba(255,255,255,1);
   border-bottom: 1px solid #000;
   padding: 3px;
 }
-
 .right-column {
+
+  background: url('grill.jpg') no-repeat center center/cover;
 position:relative;
   width: 100%;
   height: 100vh;
-color:rgba(255,255,255,1);
-  backdrop-filter: blur(10px);
+padding:5%;
+background-color:rgba(255,255,255,.1);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   overflow-y: auto;
   padding: 5px;
-  color: white;
+  color:white;
   font-family: 'Inter', sans-serif; 
 }
 
 .right-column .content {
   min-height: 200%;
+width:80%;
 }
-
 
 .grid {
       display: grid;
@@ -212,9 +263,9 @@ overflow: hidden;
 background-color:rgba(0,100,0,0.2);
 }
 
-.fire-button {
+.logout-button {
 width:100%;
-background-color:rgba(100,10,205,0.6);
+background-color:rgba(0,250,0,1);
 color:rgba(255,255,255,1);
 font-family:monospace;
 font-size: 28px;
@@ -229,13 +280,85 @@ border:none;
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+
+
+.leaf-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  max-width: 1600px;
+  margin: auto;
+  transition: transform 0.2s ease;
 }
 
-.product-img {
-height:100px;
-width:100px;
-border-radius: 15%;
-box-shadow:0,1px,2px,rgba(40,50,100);
+.leaf-button:hover {
+  transform: scale(1.02);
+}
+
+.leaf-shape {
+  transition: fill 0.3s ease;
+}
+
+.leaf-button:hover .leaf-shape {
+  fill: url(#leafGradientHover);
+}.bacon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 1600px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.bacon-button:hover {
+  transform: scale(1.02) rotate(-0.5deg);
+}
+
+
+.cheese-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 1600px;
+  cursor: pointer;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.cheese-button:hover {
+  transform: scale(1.02);
+}
+
+
+
+
+
+.fire-button {
+width:25%;
+background-color:rgba(250,0,0,1);
+color:rgba(255,255,255,1);
+font-family:monospace;
+font-size: 28px;
+font-weight:bold;
+border-radius: 5%;
+position: relative;
+border:none;
+      animation: moveBackground 50s ease infinite;
+    }
+    @keyframes moveBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 }
 
 .card-img {
@@ -272,9 +395,9 @@ color:rgba(255,255,255,1);
 }
 .label{
       font-weight:bold;
-  		font-size: 90px;
+  		font-size: 70px;
       font-family:monospace;
-color:rgba(80,190,255);
+color:rgba(250,250,0);
       border-radius: 5%;
 }
 .tab.active {
@@ -288,7 +411,6 @@ color:rgba(80,190,255);
       display: block;
       border-radius:5px;
     }
-
 
 .social-container {
       display: grid;
@@ -314,9 +436,6 @@ color:rgba(80,190,255);
       transform: scale(1.1);
     }
 
-
-
-
 .swiper-container {
 
 position:relative;
@@ -328,6 +447,7 @@ position:relative;
 }
 
 .swiper-wrapper {
+
 position:relative;
 top:40%;
 padding-left:40%;
@@ -337,6 +457,7 @@ padding-left:40%;
 }
 
 .swiper-slide {
+
   width:30%;
   height: 30%;
   object-fit: cover;
@@ -345,56 +466,9 @@ padding-left:40%;
   pointer-events: none;
 }
 
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(0, 255, 200, 0.1);
-  border: 2px solid #00ffe7;
-  color: #00ffe7;
-  font-size: 2rem;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.nav-button:hover {
-  background: #00ffe7;
-  color: #0f0c29;
-  box-shadow: 0 0 20px #00ffe7aa;
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-.hex {
-      width: 150px;
-      height: 130px;
-      background: #222;
-      clip-path: polygon(
-        50% 0%, 
-        93% 25%, 
-        93% 75%, 
-        50% 100%, 
-        7% 75%, 
-        7% 25%
-      );
-      overflow: hidden;
-      position: relative;
-    }
-
-.hex img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      animation: float 4s ease-in-out infinite;
-      transform-origin: center;
-    }
 
 @keyframes float {
+
       0%, 100% {
         transform: scale(1) translateY(0);
       }
@@ -426,7 +500,7 @@ padding-left:40%;
 }
 
 .toggle-buttons .active {
-  background: #4285f4;
+  background: #ffffaa;
   color: white;
   border: none;
 }
@@ -448,4 +522,3 @@ input, button[type="submit"] {
   padding: 10px;
   margin-top: 10px;
 }
-
